@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>领导1V1面谈预约系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>领导1V1面谈预约系统</h1>
+            <p class="subtitle">请选择空闲时间进行预约，避免无效拜访</p>
+        </header>
+
+        <div class="main-content">
+            <!-- 左侧：日期选择和时间展示 -->
+            <div class="left-panel">
+                <div class="date-picker">
+                    <button id="prevWeek" class="btn-nav">← 上周</button>
+                    <span id="weekRange" class="week-range"></span>
+                    <button id="nextWeek" class="btn-nav">下周 →</button>
+                </div>
+
+                <div class="time-slots-container">
+                    <div id="timeSlots" class="time-slots">
+                        <!-- 时间槽将通过JS动态生成 -->
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="color-box available"></span> 可预约
+                    </div>
+                    <div class="legend-item">
+                        <span class="color-box occupied"></span> 已占用
+                    </div>
+                    <div class="legend-item">
+                        <span class="color-box booked"></span> 已预约
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：预约表单 -->
+            <div class="right-panel">
+                <div class="booking-form">
+                    <h2>填写预约信息</h2>
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label for="bookerName">预约人姓名 *</label>
+                            <input type="text" id="bookerName" required placeholder="请输入您的姓名">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department">所属科室</label>
+                            <input type="text" id="department" placeholder="请输入所属科室">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookingDate">预约日期 *</label>
+                            <input type="date" id="bookingDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="startTime">开始时间 *</label>
+                            <input type="time" id="startTime" required step="300">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="duration">面谈时长（分钟）*</label>
+                            <select id="duration" required>
+                                <option value="">请选择时长</option>
+                                <option value="10">10分钟</option>
+                                <option value="15">15分钟</option>
+                                <option value="20">20分钟</option>
+                                <option value="30">30分钟</option>
+                                <option value="45">45分钟</option>
+                                <option value="60">60分钟</option>
+                                <option value="custom">自定义...</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="customDurationGroup" style="display: none;">
+                            <label for="customDuration">自定义时长（分钟）</label>
+                            <input type="number" id="customDuration" min="5" max="180" step="5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reason">沟通事项（选填）</label>
+                            <textarea id="reason" rows="3" placeholder="简要说明沟通事项"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">提交预约</button>
+                    </form>
+                </div>
+
+                <div class="my-bookings">
+                    <h2>我的预约</h2>
+                    <div class="booking-search">
+                        <input type="text" id="searchName" placeholder="输入姓名查询我的预约">
+                        <button id="searchBtn" class="btn-search">查询</button>
+                    </div>
+                    <div id="myBookingsList" class="bookings-list">
+                        <!-- 预约列表将通过JS动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>领导1V1面谈预约系统 &copy; 2026 | 规范沟通秩序，提升工作效率</p>
+        </footer>
+    </div>
+
+    <!-- 成功提示弹窗 -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="success-icon">✓</div>
+            <h3>预约成功！</h3>
+            <p id="successMessage"></p>
+            <button class="btn-ok" id="closeSuccessModal">确定</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
