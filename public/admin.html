@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>领导1V1面谈预约系统 - 管理后台</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>领导1V1面谈预约系统 - 管理后台</h1>
+            <p class="subtitle">查看和管理所有预约记录</p>
+        </header>
+
+        <div id="loginPanel" class="login-panel">
+            <h2>管理员登录</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" required placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" required placeholder="请输入密码">
+                </div>
+                <button type="submit" class="btn-submit">登录</button>
+                <p class="login-tip">默认账号: admin / 密码: admin123</p>
+            </form>
+        </div>
+
+        <div id="adminPanel" class="admin-panel" style="display: none;">
+            <div class="admin-header">
+                <h2>预约记录管理</h2>
+                <button id="logoutBtn" class="btn-logout">退出登录</button>
+            </div>
+
+            <div class="admin-controls">
+                <div class="date-filter">
+                    <label for="filterDate">按日期筛选:</label>
+                    <input type="date" id="filterDate">
+                    <button id="filterBtn" class="btn-filter">筛选</button>
+                    <button id="clearFilterBtn" class="btn-clear">清除筛选</button>
+                </div>
+                <div class="view-tabs">
+                    <button class="tab-btn active" data-view="week">本周视图</button>
+                    <button class="tab-btn" data-view="all">全部记录</button>
+                </div>
+            </div>
+
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalBookings">0</div>
+                    <div class="stat-label">总预约数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="todayBookings">0</div>
+                    <div class="stat-label">今日预约</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="weekBookings">0</div>
+                    <div class="stat-label">本周预约</div>
+                </div>
+            </div>
+
+            <div class="bookings-table-container">
+                <table class="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>预约人</th>
+                            <th>科室</th>
+                            <th>预约日期</th>
+                            <th>时间</th>
+                            <th>时长</th>
+                            <th>沟通事项</th>
+                            <th>预约时间</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <!-- 预约记录将通过JS动态生成 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="sync-section">
+                <h3>同步领导行程</h3>
+                <p>从金山文档同步领导行程，系统将自动更新可用时间。</p>
+                <div class="sync-controls">
+                    <textarea id="scheduleData" placeholder="请粘贴从金山文档导出的JSON格式行程数据..." rows="5"></textarea>
+                    <button id="syncBtn" class="btn-sync">同步行程</button>
+                </div>
+                <div class="sync-tip">
+                    <p>JSON格式示例:</p>
+                    <pre>[
+  {"event_date": "2026-07-01", "start_time": "09:00", "end_time": "10:00", "event_name": "院务会"},
+  {"event_date": "2026-07-01", "start_time": "14:00", "end_time": "15:30", "event_name": "外出调研"}
+]</pre>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>领导1V1面谈预约系统 &copy; 2026 | 管理后台</p>
+        </footer>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
